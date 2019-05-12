@@ -1,0 +1,28 @@
+server:
+    port: 8080 # Server HTTP port.
+
+management:
+  endpoints:
+    enabled-by-default: false
+    web:
+      exposure:
+        include: health, info, env, httptrace, logfile, loggers, metrics, scheduledtasks
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+    info:
+      enabled: true
+    env:
+      enabled: true
+    httptrace:
+      enabled: true
+    logfile:
+      enabled: true
+    metrics:
+      enabled: true
+    scheduledtasks:
+      enabled: true
+  health:
+    mail:
+      enabled: false
