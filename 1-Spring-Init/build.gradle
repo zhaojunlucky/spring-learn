@@ -50,3 +50,6 @@ dependencies {
 // 		mavenBom "de.codecentric:spring-boot-admin-dependencies:${springBootAdminVersion}"
 // 	}
 // }
+gradle.taskGraph.afterTask { Task task, TaskState state ->
+	println("${task.name}: ${state.isFromCache()}")
+}
