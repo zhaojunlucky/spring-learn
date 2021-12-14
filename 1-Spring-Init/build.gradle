@@ -1,13 +1,28 @@
+buildscript {
+	repositories {
+		mavenLocal()
+		mavenCentral()
+	}
+
+	dependencies {
+		classpath 'org.jooq:jooq-codegen:3.15.5'
+		classpath 'com.h2database:h2:2.0.202'
+	}
+}
+
+
 plugins {
-	id 'org.springframework.boot' version '2.1.4.RELEASE'
+	id 'org.springframework.boot' version '2.6.1'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'org.springframework.experimental.aot' version '0.11.0-RC1'
 }
 
 apply plugin: 'io.spring.dependency-management'
 
 group = 'com.magicworldz'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.11'
+sourceCompatibility = '1.17'
 
 configurations {
 	compileOnly {
@@ -16,11 +31,8 @@ configurations {
 }
 
 repositories {
+	maven { url 'https://repo.spring.io/milestone' }
 	mavenCentral()
-}
-
-ext {
-	set('springBootAdminVersion', '2.1.3')
 }
 
 dependencies {
@@ -30,12 +42,12 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-quartz'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	//implementation 'de.codecentric:spring-boot-admin-starter-server'
+	implementation 'org.springframework.boot:spring-boot-starter-jooq'
 	implementation 'org.springframework.retry:spring-retry'
 	// https://mvnrepository.com/artifact/org.codehaus.janino/janino
-	compile group: 'org.codehaus.janino', name: 'janino', version: '3.0.12'
+	implementation 'org.codehaus.janino:janino:3.1.6'
 	// https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
-	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
+	implementation 'org.apache.commons:commons-lang3:3.12.0'
 
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'org.springframework.boot:spring-boot-devtools'
@@ -45,11 +57,36 @@ dependencies {
 	//testImplementation 'org.springframework.security:spring-security-test'
 }
 
-// dependencyManagement {
-// 	imports {
-// 		mavenBom "de.codecentric:spring-boot-admin-dependencies:${springBootAdminVersion}"
-// 	}
-// }
 gradle.taskGraph.afterTask { Task task, TaskState state ->
 	println("${task.name}: ${state.isFromCache()}")
+}
+
+test {
+	useJUnitPlatform()
+}
+
+bootBuildImage {
+	builder = 'paketobuildpacks/builder:tiny'
+	environment = ['BP_NATIVE_IMAGE': 'true']
+}
+
+task jooqGenerate {
+	doFirst {
+		def configuration = new org.jooq.meta.jaxb.Configuration().withJdbc(new org.jooq.meta.jaxb.Jdbc()
+				.withDriver("org.h2.Driver")
+				.withUrl("jdbc:h2:~/test")
+				.withUser("sa")
+				.withPassword("sa"))
+				.withGenerator(new org.jooq.meta.jaxb.Generator()
+						.withDatabase(new org.jooq.meta.jaxb.Database()
+								.withName("org.jooq.meta.h2.H2Database")
+								.withIncludes(".*")
+								.withExcludes("")
+								.withInputSchema("public"))
+						.withTarget(new org.jooq.meta.jaxb.Target()
+								.withPackageName("com.magicworldz.springlearn.db")
+								.withDirectory("src/main/generated")));
+
+		org.jooq.codegen.GenerationTool.generate(configuration)
+	}
 }

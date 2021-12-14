@@ -8,7 +8,7 @@ spring:
             enabled: true
     datasource:
         driver-class-name: org.h2.Driver
-        url: "jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;mode=PostgreSQL"
+        url: "jdbc:h2:~/test;DB_CLOSE_DELAY=-1;mode=PostgreSQL"
         username: sa
         password: sa
         initialization-mode: always

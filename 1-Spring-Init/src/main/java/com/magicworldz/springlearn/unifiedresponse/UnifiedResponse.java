@@ -30,7 +30,7 @@ public class UnifiedResponse implements ResponseBodyAdvice<Object> {
             ServerHttpResponse response) {
         if (!(body instanceof ResponseDTO)) {
             var resp = ResponseDTO.success(body);
-            response.getHeaders().setContentType(MediaType.APPLICATION_JSON_UTF8);
+            response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
             if (body instanceof String) {
                 try {
                     return JsonUtil.writeObjAsString(resp);
