@@ -1,20 +1,16 @@
 logging:
     path: c:/temp/spring-learn/logs
 
-# for H2 database
+# for PostgreSQL database
 spring:
-    h2:
-        console:
-            enabled: true
     datasource:
-        driver-class-name: org.h2.Driver
-        url: "jdbc:h2:~/test;DB_CLOSE_DELAY=-1;mode=PostgreSQL"
+#        driver-class-name: org.h2.Driver
+        url: "jdbc:postgresql://10.227.213.112/sa"
         username: sa
         password: sa
-        initialization-mode: always
-        platform: h2
-        initialize: true
     jpa:
         show-sql: true
         hibernate:
             ddl-auto: none
+    flyway:
+        clean-disabled: true
