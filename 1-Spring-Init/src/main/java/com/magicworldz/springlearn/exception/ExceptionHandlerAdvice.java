@@ -3,9 +3,7 @@ package com.magicworldz.springlearn.exception;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.magicworldz.springlearn.exception.entity.CustomerRuntimeException;
-import com.magicworldz.springlearn.exception.entity.ErrorCode;
-import com.magicworldz.springlearn.exception.entity.ResponseDTO;
+import com.magicworldz.springlearn.dto.response.ResponseDTO;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;

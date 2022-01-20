@@ -1,8 +1,8 @@
 package com.magicworldz.springlearn.unifiedresponse;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.magicworldz.springlearn.exception.entity.CustomerRuntimeException;
-import com.magicworldz.springlearn.exception.entity.ResponseDTO;
+import com.magicworldz.springlearn.exception.CustomerRuntimeException;
+import com.magicworldz.springlearn.dto.response.ResponseDTO;
 import com.magicworldz.springlearn.utils.JsonUtil;
 
 import org.springframework.core.MethodParameter;

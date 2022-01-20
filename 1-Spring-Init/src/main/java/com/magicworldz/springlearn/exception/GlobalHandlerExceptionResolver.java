@@ -7,8 +7,7 @@ import java.nio.charset.StandardCharsets;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.magicworldz.springlearn.exception.entity.ErrorCode;
-import com.magicworldz.springlearn.exception.entity.ResponseDTO;
+import com.magicworldz.springlearn.dto.response.ResponseDTO;
 import com.magicworldz.springlearn.utils.JsonUtil;
 
 import org.springframework.http.HttpStatus;

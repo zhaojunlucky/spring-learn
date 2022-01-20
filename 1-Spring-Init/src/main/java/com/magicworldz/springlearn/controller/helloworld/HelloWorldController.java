@@ -1,4 +1,4 @@
-package com.magicworldz.springlearn.helloworld;
+package com.magicworldz.springlearn.controller.helloworld;
 
 import com.magicworldz.springlearn.utils.PasswordUtil;
 

@@ -1,5 +1,6 @@
-package com.magicworldz.springlearn.exception.entity;
+package com.magicworldz.springlearn.dto.response;
 
+import com.magicworldz.springlearn.exception.ErrorCode;
 import lombok.Data;
 
 @Data

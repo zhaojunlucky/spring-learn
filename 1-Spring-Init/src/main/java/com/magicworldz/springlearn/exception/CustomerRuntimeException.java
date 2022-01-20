@@ -1,4 +1,4 @@
-package com.magicworldz.springlearn.exception.entity;
+package com.magicworldz.springlearn.exception;
 
 public class CustomerRuntimeException extends RuntimeException {
     private static final long serialVersionUID = 4765186863829227620L;

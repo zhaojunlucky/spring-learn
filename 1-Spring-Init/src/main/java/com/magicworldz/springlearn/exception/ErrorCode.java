@@ -1,4 +1,4 @@
-package com.magicworldz.springlearn.exception.entity;
+package com.magicworldz.springlearn.exception;
 
 import lombok.Getter;
 
